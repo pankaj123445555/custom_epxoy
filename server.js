@@ -5,8 +5,7 @@ require('dotenv').config();
 const Port = process.env.PORT||5000;
 const uri = process.env.MONGO_URI
 app.use(express.json());
-
-
+const Notifications = require('./models/notificationModel');
 mongoose.connect(uri)
 .then(()=>{
     console.log('database(mongodb) is connected successfully)')
@@ -18,7 +17,6 @@ mongoose.connect(uri)
 const userRouter = require('./Router/userRouter');
 
 app.use('/api/user', userRouter);
-
 
 
 

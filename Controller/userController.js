@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const User = require('../models/Users');
+const Notifications = require('../models/notificationModel')
 
 const registerUser = async (req,res)=>{
     console.log(req.body);
@@ -22,6 +23,10 @@ const registerUser = async (req,res)=>{
         age,
         gender
     })
+    const NotificationCart =  new Notifications({
+        userId : newUser._id
+    })
+     NotificationCart.save();
     return res.status(200).json({
         message : "user registered successfully",
         user : newUser
