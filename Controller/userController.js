@@ -42,4 +42,31 @@ catch(error)
 }
 }
 
-module.exports = registerUser;
+const getAllUserDetails = async (req,res) => {
+        
+      try{
+
+        const users = await User.find({});
+
+        if(users.length===0)
+        {
+            return res.status(404).json({
+                message : "No user found"
+            })
+        }
+        return res.status(200).json({
+            message : "list of all user",
+            count : users.length,
+            users : users
+        })
+      }
+      catch(error)
+      {
+           return res.status(500).json({
+            message : "An error occured while fetching all the user",
+            error : error
+           })
+      }
+}
+
+module.exports = {registerUser,getAllUserDetails};
